@@ -14,6 +14,7 @@ static ArrayList<String> vcfToStringArray{
     {
       mutationFileStrokes.add(rStr);
     }  
+////
   }
 }
   public static void main(String[] args){
