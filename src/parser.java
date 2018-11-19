@@ -11,9 +11,10 @@ import java.util.HashMap;
 class VCF_parser {
 
 	static void vcfToStringArray() throws IOException {
-		FileInputStream s = new FileInputStream("src/test.vcf");// создаем поток из файла
+		FileInputStream s = new FileInputStream("bin/test.vcf");// создаем поток из файла
 		BufferedReader buf = new BufferedReader(new InputStreamReader(s));// создаем буфер от входного потока
 		FileWriter writer = new FileWriter("out.vcf");
+		
 		
 		ArrayList<String> propertiesFileStrokes = new ArrayList<String>();
 		ArrayList<String> mutationFileStrokes = new ArrayList<String>();
@@ -62,6 +63,8 @@ class VCF_parser {
 			    
 			   
 			   VCF a = new VCF("SimpleTest1.txt"); 
+			   a.addInfoString("TEST ID" , '1' , "Integer" , "Test for constructor" );
+			   a.addInfoValues("test ID", 0.99999);
 			   a.printFile();
 	}
 }

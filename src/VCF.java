@@ -25,13 +25,24 @@ public class VCF {
 		}
 
 	}
+
 	void printFile() throws IOException {
 		FileWriter writer = new FileWriter("out.vcf");
-		for(InformationParameter p : parameters)
-			writer.write(p.VcfFormat());
-		writer.write(defaultStringtemplate);
-		for(MutationParameter p : mutations)
-			writer.write(p.VcfFormat());
+		for (InformationParameter p : parameters)
+			writer.write(p.VcfFormat() + '\n');
+		writer.write(defaultStringtemplate + '\n');
+		for (MutationParameter p : mutations)
+			writer.write(p.VcfFormat() + '\n');
+		writer.flush();
+	}
+
+	void addInfoString(String ID_, char number_, String type_, String description_) {
+		parameters.add(new InformationParameter(ID_, number_, type_, description_));
+	}
+
+	void addInfoValues(String info, double input) {
+		for (MutationParameter p : mutations)
+			p.addInfoValue(info, input);
 	}
 
 }
