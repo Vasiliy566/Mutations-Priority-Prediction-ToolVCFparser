@@ -48,22 +48,4 @@ public class InformationParameter {
 		description = description_;
 	}
 
-	// functions that returns private elements
-	// done to save class parameters form user's access
-	public String getID() {
-		return ID;
-	}
-
-	public char getNumber() {
-		return number;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 }

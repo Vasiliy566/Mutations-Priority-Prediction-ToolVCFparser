@@ -1,4 +1,3 @@
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -154,7 +153,7 @@ public class MutationParameter {
 		return ans;
 	}
 
-	// add valuse[INFO ID] , [value] to values HashMap
+	// add values [INFO ID] , [value] to values HashMap
 	void addInfoValue(String key, double value) {
 		info.put(key, value);
 	}
