@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class MutationParameter {
 
@@ -28,7 +29,7 @@ public class MutationParameter {
 	private char ref;
 	// Reference base
 	// example: A
-	// meaning: The reference base (or bases in the case of an indel) at the given
+	// meaning: The reference base (or bases in the case of an index) at the given
 	// position on the given reference sequence.
 
 	private char alt;
@@ -68,72 +69,52 @@ public class MutationParameter {
 	// !!! DANGEROUS! MONKEY CODING DETECTED!!!
 	MutationParameter(String infoFromVCF) {// CAN BE UPGRATE BY
 											// REFLECTIONS(http://qaru.site/questions/95345/how-to-loop-over-a-class-attributes-in-java)
+		Scanner scan = new Scanner(infoFromVCF);
+		
+		chrom = Integer.valueOf(scan.next());
 
-		int from = 0;
-		int to = infoFromVCF.indexOf('\t');
+		pos = Integer.valueOf(scan.next());
 
-		chrom = Integer.valueOf(infoFromVCF.substring(from, to));
+		
+		ID = scan.next();
 
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
+		ref = scan.next().charAt(0);
 
-		pos = Integer.valueOf(infoFromVCF.substring(from + 1, to));
+		alt = scan.next().charAt(0);
 
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
+		qual = Double.valueOf(scan.next());
 
-		ID = infoFromVCF.substring(from + 1, to);
+		filter = scan.next();
 
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
-
-		ref = infoFromVCF.substring(from + 1, to).charAt(0);
-
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
-
-		alt = infoFromVCF.substring(from + 1, to).charAt(0);
-
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
-
-		qual = Double.valueOf(infoFromVCF.substring(from + 1, to));
-
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
-
-		filter = infoFromVCF.substring(from + 1, to);
-
-		from = to;
-		to = infoFromVCF.indexOf('\t', to + 1);
-
+		String s = scan.next();
 		String key = "";
 		String value = "";
-		for (int i = from + 1; i <= to; i++) {
-			if (infoFromVCF.charAt(i) == '=') {
-				for (int j = i + 1; infoFromVCF.charAt(j) != ';'; j++)
-					value += infoFromVCF.charAt(j);
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '=') {
+				for (int j = i + 1; s.charAt(j) != ';'; j++)
+					value += s.charAt(j);
 				i += value.length() + 1;
 				info.put(key, Double.valueOf(value));
 				value = "";
 				key = "";
 
 			} else {
-				key += infoFromVCF.charAt(i);
+				key += s.charAt(i);
 			}
 		}
-		from = to;
+		
+		s = scan.next();
 		String ans = "";
-		for (int i = from; i < infoFromVCF.length(); i++) {
-			if (infoFromVCF.charAt(i) != ':') {
-				ans += infoFromVCF.charAt(i);
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) != ':') {
+				ans += s.charAt(i);
 			} else {
 				format.add(ans);
 				ans = "";
 			}
 		}
 		format.add(ans);
-
+ scan.close();
 	}
 
 	public String VcfFormat() { // Return mutation's string in VCF-format
