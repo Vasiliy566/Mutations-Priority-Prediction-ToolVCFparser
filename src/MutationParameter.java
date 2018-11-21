@@ -89,21 +89,24 @@ public class MutationParameter {
 
 		String key = "";
 		String value = "";
-	
-			for (int i = 0; i < s.length(); i++) {
-				if (s.charAt(i) == '=' && i + 1 >= s.length()) {
-					for (int j = i + 1; j < s.length() || s.charAt(j) != ';'; j++)
-						value += s.charAt(j);
-					i += value.length() + 1;
-					info.put(key, Double.valueOf(value));
-					value = "";
-					key = "";
+		
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '=' && i + 1 < s.length()) {
+				for (int j = i + 1; j < s.length() && s.charAt(j) != ';'; j++)
+					value += s.charAt(j);
+				i += value.length() + 1;
+				System.out.println(s);
+				System.out.println(value + " !! " + key);
+				
+				info.put(key, Double.valueOf(value));
+				value = "";
+				key = "";
 
-				} else {
-					key += s.charAt(i);
-				}
+			} else {
+				key += s.charAt(i);
 			}
-	
+		}
+
 		s = scan.next();
 		String ans = "";
 		for (int i = 0; i < s.length(); i++) {
