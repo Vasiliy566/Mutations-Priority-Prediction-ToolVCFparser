@@ -1,7 +1,8 @@
 /** 
  * Class information parameter in VCF-files format 
  *  <b>ID</b> , <b>number</b> , <b>type</b> , <b>description</b>.
- * @autor Isaev Vasily, Lonishin Lubov
+ * @author IsaevVasily
+ * @author Lonishin Lubov
  * @version 2.1
 */
 public class InformationParameter {
@@ -15,7 +16,7 @@ public class InformationParameter {
 	private String ID;
 	
 	/**
-	 * Numerical parameter's value // ЧТО ЭТО ?!?!? Type 'char' beacuse of
+	 * Numerical parameter's value // ЧТО ЭТО ?!?!? Type 'char' because of
 	 * wikipedia's example "https://en.wikipedia.org/wiki/Variant_Call_Format"
 	 * included ##INFO=<ID=AF,Number=A,.. , but 'A' isn't a number example " : 1
 	 * meaning: ???
@@ -49,7 +50,8 @@ public class InformationParameter {
      * @see InformationParameter#InformationParameter()
      */
 	InformationParameter(String infoFromVCF) {
-		ID = infoFromVCF.substring("##INFO=<ID=".length(), infoFromVCF.indexOf(','));
+		System.out.println(infoFromVCF);
+		ID = infoFromVCF.substring("##INFO=<ID=".length(), infoFromVCF.indexOf(","));
 		number = infoFromVCF.charAt(("##INFO=<ID=,Number=" + ID).length());
 		type = infoFromVCF.substring(("##INFO=<ID=,Number=A,Type=" + ID).length(),
 				infoFromVCF.indexOf(',', ("##INFO=<ID=,Number=A,Type=" + ID).length()));

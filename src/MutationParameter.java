@@ -70,12 +70,11 @@ public class MutationParameter {
 	MutationParameter(String infoFromVCF) {// CAN BE UPGRATE BY
 											// REFLECTIONS(http://qaru.site/questions/95345/how-to-loop-over-a-class-attributes-in-java)
 		Scanner scan = new Scanner(infoFromVCF);
-		
+
 		chrom = Integer.valueOf(scan.next());
 
 		pos = Integer.valueOf(scan.next());
 
-		
 		ID = scan.next();
 
 		ref = scan.next().charAt(0);
@@ -87,22 +86,24 @@ public class MutationParameter {
 		filter = scan.next();
 
 		String s = scan.next();
+
 		String key = "";
 		String value = "";
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == '=') {
-				for (int j = i + 1; s.charAt(j) != ';'; j++)
-					value += s.charAt(j);
-				i += value.length() + 1;
-				info.put(key, Double.valueOf(value));
-				value = "";
-				key = "";
+	
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) == '=' && i + 1 >= s.length()) {
+					for (int j = i + 1; j < s.length() || s.charAt(j) != ';'; j++)
+						value += s.charAt(j);
+					i += value.length() + 1;
+					info.put(key, Double.valueOf(value));
+					value = "";
+					key = "";
 
-			} else {
-				key += s.charAt(i);
+				} else {
+					key += s.charAt(i);
+				}
 			}
-		}
-		
+	
 		s = scan.next();
 		String ans = "";
 		for (int i = 0; i < s.length(); i++) {
@@ -114,7 +115,7 @@ public class MutationParameter {
 			}
 		}
 		format.add(ans);
- scan.close();
+		scan.close();
 	}
 
 	public String VcfFormat() { // Return mutation's string in VCF-format

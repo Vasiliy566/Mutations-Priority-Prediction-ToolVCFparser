@@ -17,14 +17,14 @@ public class VCF {
 		BufferedReader buf = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
 		String curString = "";
 		while ((curString = buf.readLine()) != null) {
-			if (curString.substring(0, 2).equals("##INFO"))
+			if (curString.substring(0, 6).equals("##INFO"))
 				parameters.add(new InformationParameter(curString));
 			else if (curString.charAt(0) == '#')
 				defaultStringtemplate = curString;
 			else
 				mutations.add(new MutationParameter(curString));
 		}
-
+		buf.close();
 	}
 
 	// function that print all VCF-class info to VCF-file template and create
