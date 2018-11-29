@@ -1,6 +1,8 @@
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -70,55 +72,60 @@ public class MutationParameter {
 	MutationParameter(String infoFromVCF) {// CAN BE UPGRATE BY
 											// REFLECTIONS(http://qaru.site/questions/95345/how-to-loop-over-a-class-attributes-in-java)
 		Scanner scan = new Scanner(infoFromVCF);
+		try {
+			chrom = scan.nextInt();
 
-		chrom = Integer.valueOf(scan.next());
+			pos = scan.nextInt();
 
-		pos = Integer.valueOf(scan.next());
+			ID = scan.next();
 
-		ID = scan.next();
+			ref = scan.next().charAt(0);
 
-		ref = scan.next().charAt(0);
+			alt = scan.next().charAt(0);
 
-		alt = scan.next().charAt(0);
+			qual = scan.nextDouble();
 
-		qual = Double.valueOf(scan.next());
+			filter = scan.next();
 
-		filter = scan.next();
+			String s = scan.next();
 
-		String s = scan.next();
+			String key = "";
+			String value = "";
 
-		String key = "";
-		String value = "";
-		
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == '=' && i + 1 < s.length()) {
-				for (int j = i + 1; j < s.length() && s.charAt(j) != ';'; j++)
-					value += s.charAt(j);
-				i += value.length() + 1;
-				System.out.println(s);
-				System.out.println(value + " !! " + key);
-				
-				info.put(key, Double.valueOf(value));
-				value = "";
-				key = "";
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) == '=' && i + 1 < s.length()) {
+					for (int j = i + 1; j < s.length() && s.charAt(j) != ';'; j++)
+						value += s.charAt(j);
+					i += value.length() + 1;
+					info.put(key, Double.valueOf(value));
+					value = "";
+					key = "";
 
-			} else {
-				key += s.charAt(i);
+				} else {
+					key += s.charAt(i);
+				}
 			}
-		}
 
-		s = scan.next();
-		String ans = "";
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) != ':') {
-				ans += s.charAt(i);
-			} else {
-				format.add(ans);
-				ans = "";
+			s = scan.next();
+			String ans = "";
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) != ':') {
+					ans += s.charAt(i);
+				} else {
+					format.add(ans);
+					ans = "";
+				}
 			}
+			format.add(ans);
+
+			scan.close();
+		} catch (InputMismatchException e1) {
+			System.err.println("INVALID  NUMERICAL MUTATION VCF-STRING PARAMETR");
+			throw e1;
+		} catch (NoSuchElementException e2) {
+			System.err.println("INVALID MUTATION VCF-STRING FORMAT");
+			throw e2;
 		}
-		format.add(ans);
-		scan.close();
 	}
 
 	public String VcfFormat() { // Return mutation's string in VCF-format
@@ -126,7 +133,8 @@ public class MutationParameter {
 		String ans = (chrom + "\t" + pos + "\t" + ID + "\t" + ref + "\t" + alt + "\t" + qual + "\t" + filter + "\t");
 
 		// return INFO-values
-		for (Map.Entry entry : info.entrySet())
+		for (@SuppressWarnings("rawtypes")
+		Map.Entry entry : info.entrySet())
 			ans += entry.getKey() + "=" + entry.getValue() + ";";
 		ans += "\t";
 

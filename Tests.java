@@ -20,8 +20,7 @@ public class Tests {
 		InformationParameter info1 = new InformationParameter("TEST_ID", '1', "Integer", "Test_for_constructor");
 		//System.out.println(info1.VcfFormat()); // look for console output and watch that string has correct dormat
 
-		//MutationParameter mut = new MutationParameter("20     17330    .          T     A      3     q10     NS=3;DP=11;AF=0.017               GT:GQ:DP:HQ  0|0:49:3:58,50  0|1:3:5:65,3     0/0:41:3");
-		//System.out.println(mut.VcfFormat());
+		MutationParameter mut = new MutationParameter("20A	14370	rs6054257	G	A	29	PASS	NS=3;DP=14;AF=0.5;	GT:GQ:DP:HQ");
 		
 		
 		// test of VCF-class
