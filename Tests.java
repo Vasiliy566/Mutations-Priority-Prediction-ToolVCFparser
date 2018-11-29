@@ -17,7 +17,7 @@ public class Tests {
 		//System.out.println(info.VcfFormat().equals(test2));// testing that input string equals to string, constructed
 															// with InformationParameter.VCF_form
 
-		InformationParameter info1 = new InformationParameter("TEST ID", '1', "Integer", "Test for constructor");
+		InformationParameter info1 = new InformationParameter("TEST_ID", '1', "Integer", "Test_for_constructor");
 		//System.out.println(info1.VcfFormat()); // look for console output and watch that string has correct dormat
 
 		//MutationParameter mut = new MutationParameter("20     17330    .          T     A      3     q10     NS=3;DP=11;AF=0.017               GT:GQ:DP:HQ  0|0:49:3:58,50  0|1:3:5:65,3     0/0:41:3");
