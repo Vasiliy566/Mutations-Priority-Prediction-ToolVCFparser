@@ -1,8 +1,8 @@
 /** 
  * Class information parameter in VCF-files format 
  *  <b>ID</b> , <b>number</b> , <b>type</b> , <b>description</b>.
- * @author IsaevVasily
- * @author Lonishin Lubov
+ * @author Isaev_Vasily
+ * @author Lonishin_Lubov
  * @version 2.1
 */
 public class InformationParameter {

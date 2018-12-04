@@ -43,11 +43,13 @@ public class VCF {
 	void addInfoString(String ID_, char number_, String type_, String description_) {
 		parameters.add(new InformationParameter(ID_, number_, type_, description_));
 	}
-
+    
 	// function that add given values 'input' for all mutations in filed 'info'
 	void addInfoValues(String info, double input) {
 		for (MutationParameter p : mutations)
 			p.addInfoValue(info, input);
 	}
+	
+	
 
 }

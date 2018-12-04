@@ -150,4 +150,13 @@ public class MutationParameter {
 	void addInfoValue(String key, double value) {
 		info.put(key, value);
 	}
+
+ double getValue(String paramName) {
+		try {
+			return info.get(paramName);
+		} catch (Exception e) {
+			System.err.println("No such parametr as <" + paramName + "> in mutation " + ID);
+			return 0;
+		}
+	}
 }
