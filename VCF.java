@@ -4,11 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VCF {
 	ArrayList<MutationParameter> mutations = new ArrayList<MutationParameter>(); // all mutations in one list
 	ArrayList<InformationParameter> parameters = new ArrayList<InformationParameter>(); // all parameters in one list
-
+	ArrayList<PriorityValueCountRule> priorityConfigs = new ArrayList<PriorityValueCountRule>(); // all configurations
+																									// to calculate
+																									// mutations
+																									// priority
 	String defaultStringtemplate = "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT"; // template for mutation
 																								// string
 
@@ -25,11 +29,14 @@ public class VCF {
 				mutations.add(new MutationParameter(curString));
 		}
 		buf.close();
+		// default configurations to calculate mutaion's parameters 
+		//priorityConfigs.add(new PriorityValueCountRule(id_, threshold_, more_, reward_))
 	}
 
 	// function that print all VCF-class info to VCF-file template and create
 	// correctly VCF-file
 	void printFile() throws IOException {
+		@SuppressWarnings("resource")
 		FileWriter writer = new FileWriter("out.vcf");
 		for (InformationParameter p : parameters)
 			writer.write(p.VcfFormat() + '\n');
@@ -43,13 +50,18 @@ public class VCF {
 	void addInfoString(String ID_, char number_, String type_, String description_) {
 		parameters.add(new InformationParameter(ID_, number_, type_, description_));
 	}
-    
+
 	// function that add given values 'input' for all mutations in filed 'info'
 	void addInfoValues(String info, double input) {
 		for (MutationParameter p : mutations)
 			p.addInfoValue(info, input);
 	}
-	
-	
+
+	void CalculatePriorityMutation() {
+		for (MutationParameter p : mutations) {
+		//	for()
+		//	p.addInfoValue("MutationPriority", value);
+		}
+	}
 
 }
