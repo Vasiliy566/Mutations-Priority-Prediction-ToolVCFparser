@@ -1,7 +1,5 @@
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Scanner;
 
 public class Tests {
 	public static void main(String[] args) throws IOException {
@@ -32,8 +30,8 @@ public class Tests {
 		*/
 	   // test of PriorityValueCountRule
 		
-		VCF a = new VCF("test.vcf");
-		a.addCalculateConfig(new PriorityValueCountRule("DP", 'e', 13, 123));
+		VCF a = new VCF("src/resources/test.vcf");
+		a.addCalculateConfig(new PriorityValueCountRule("DP", 's', 130, 0.6633));
 		a.CalculatePriorityMutation();
 		a.printFile();
 		
