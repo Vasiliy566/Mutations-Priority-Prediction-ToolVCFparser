@@ -33,7 +33,7 @@ public class Tests {
 	   // test of PriorityValueCountRule
 		
 		VCF a = new VCF("test.vcf");
-		a.addCalculateConfig(new PriorityValueCountRule("DP", 's', 12, 3));
+		a.addCalculateConfig(new PriorityValueCountRule("DP", 'b', 12, 3));
 		a.CalculatePriorityMutation();
 		a.printFile();
 		
