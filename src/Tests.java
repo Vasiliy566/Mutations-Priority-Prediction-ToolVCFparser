@@ -18,7 +18,7 @@ public class Tests {
 															// with InformationParameter.VCF_form
 
 		InformationParameter info1 = new InformationParameter("TEST_ID", '1', "Integer", "Test_for_constructor");
-		//System.out.println(info1.VcfFormat()); // look for console output and watch that string has correct dormat
+		//System.out.println(info1.VcfFormat()); // look for console output and watch that string has correct format
 
 		
 		// test of VCF-class
