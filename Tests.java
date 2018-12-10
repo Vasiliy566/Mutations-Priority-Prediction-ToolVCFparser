@@ -1,4 +1,6 @@
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Tests {
@@ -20,16 +22,20 @@ public class Tests {
 		InformationParameter info1 = new InformationParameter("TEST_ID", '1', "Integer", "Test_for_constructor");
 		//System.out.println(info1.VcfFormat()); // look for console output and watch that string has correct dormat
 
-		MutationParameter mut = new MutationParameter("20	14370	rs6054257	G	A	29	PASS	NS=3;DP=14;AF=0.5;	GT:GQ:DP:HQ");
-		System.out.println(mut.getValue("NS ") + " " + mut.getValue("DP") + " " + mut.getValue(" AF ") + "-----------");
 		
 		// test of VCF-class
-		VCF a = new VCF("test.vcf");
+		/*VCF a = new VCF("test.vcf");
 		a.printFile();
 		a.addInfoString("TEST ID", '1', "Integer", "Test for constructor"); // test of adding of ##INFO-strings
 		a.addInfoValues("test ID", 0.99999); // test of adding new value for all mutations
 		a.printFile();
+		*/
+	   // test of PriorityValueCountRule
 		
+		VCF a = new VCF("test.vcf");
+		a.addCalculateConfig(new PriorityValueCountRule("DP", 's', 12, 3));
+		a.CalculatePriorityMutation();
+		a.printFile();
 		
 	}
 }

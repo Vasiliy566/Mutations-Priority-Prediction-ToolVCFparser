@@ -1,3 +1,4 @@
+
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -150,8 +151,12 @@ public class MutationParameter {
 	void addInfoValue(String key, double value) {
 		info.put(key, value);
 	}
-
-       double getValue(String paramName) {
+    public boolean containsValue(String paramName) {
+    	if (info.get(paramName) != null)
+    		return true;
+    	return false;
+    }
+	double getValue(String paramName) {
 		try {
 			return info.get(paramName);
 		} catch (Exception e) {

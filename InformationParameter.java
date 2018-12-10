@@ -1,3 +1,4 @@
+
 /** 
  * Class information parameter in VCF-files format 
  *  <b>ID</b> , <b>number</b> , <b>type</b> , <b>description</b>.
@@ -50,7 +51,6 @@ public class InformationParameter {
      * @see InformationParameter#InformationParameter()
      */
 	InformationParameter(String infoFromVCF) {
-		System.out.println(infoFromVCF);
 		ID = infoFromVCF.substring("##INFO=<ID=".length(), infoFromVCF.indexOf(","));
 		number = infoFromVCF.charAt(("##INFO=<ID=,Number=" + ID).length());
 		type = infoFromVCF.substring(("##INFO=<ID=,Number=A,Type=" + ID).length(),

@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -9,11 +10,12 @@ import java.util.List;
 public class VCF {
 	ArrayList<MutationParameter> mutations = new ArrayList<MutationParameter>(); // all mutations in one list
 	ArrayList<InformationParameter> parameters = new ArrayList<InformationParameter>(); // all parameters in one list
-	ArrayList<PriorityValueCountRule> priorityConfigs = new ArrayList<PriorityValueCountRule>(); // all configurations
-																									// to calculate
-																									// mutations
-																									// priority
-	String defaultStringtemplate = "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT"; // template for mutation
+	private ArrayList<PriorityValueCountRule> priorityConfigs = new ArrayList<PriorityValueCountRule>(); // all
+																											// configurations
+	// to calculate
+	// mutations
+	// priority
+	String defaultStringTemplate = "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT"; // template for mutation
 																								// string
 
 	// constructor, that takes VCF-class from VCF-file, filling all fields
@@ -24,13 +26,14 @@ public class VCF {
 			if (curString.substring(0, 6).equals("##INFO"))
 				parameters.add(new InformationParameter(curString));
 			else if (curString.charAt(0) == '#')
-				defaultStringtemplate = curString;
+				defaultStringTemplate = curString;
 			else
 				mutations.add(new MutationParameter(curString));
 		}
 		buf.close();
-		// default configurations to calculate mutaion's parameters 
-		//priorityConfigs.add(new PriorityValueCountRule(id_, threshold_, more_, reward_))
+		// default configurations to calculate mutaion's parameters
+		// priorityConfigs.add(new PriorityValueCountRule(id_, threshold_, more_,
+		// reward_))
 	}
 
 	// function that print all VCF-class info to VCF-file template and create
@@ -40,7 +43,7 @@ public class VCF {
 		FileWriter writer = new FileWriter("out.vcf");
 		for (InformationParameter p : parameters)
 			writer.write(p.VcfFormat() + '\n');
-		writer.write(defaultStringtemplate + '\n');
+		writer.write(defaultStringTemplate + '\n');
 		for (MutationParameter p : mutations)
 			writer.write(p.VcfFormat() + '\n');
 		writer.flush();
@@ -57,11 +60,20 @@ public class VCF {
 			p.addInfoValue(info, input);
 	}
 
-	void CalculatePriorityMutation() {
-		for (MutationParameter p : mutations) {
-		//	for()
-		//	p.addInfoValue("MutationPriority", value);
-		}
+	public void addCalculateConfig(PriorityValueCountRule rule) {
+		priorityConfigs.add(rule);
 	}
 
+	void CalculatePriorityMutation() {
+		if (!parameters.contains(new InformationParameter(
+				"##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">")))
+			parameters.add(new InformationParameter(
+					"##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
+		for (MutationParameter mutation : mutations) {
+			double priorityValue = 0;
+			for (PriorityValueCountRule rule : priorityConfigs)
+				priorityValue += rule.calculateValue(mutation);
+			mutation.addInfoValue("MP", priorityValue);
+		}
+	}
 }
