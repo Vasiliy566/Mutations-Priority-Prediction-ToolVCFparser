@@ -4,8 +4,9 @@ public class PriorityValueCountRule {
 	String id;
 
 	// threshold for id's value
-	double threshold;
+	double thresholdDouble;
 
+	char thresholdChar;
 	// string to check contains it or not ( key \'a\')
 	String contains;
 
@@ -22,11 +23,11 @@ public class PriorityValueCountRule {
 	// Constructor if given just parameter for More / Less
 
 	PriorityValueCountRule(String id_, char statusKey_, int threshold_, double reward_) {
-		if (! (statusKey_ == 'b' || statusKey_ == 'e' || statusKey_ == 's' ))
+		if (!(statusKey_ == 'b' || statusKey_ == 'e' || statusKey_ == 's'))
 			System.err.println(
 					"input parametrs can be used just for checking bigger/smaller/equals\nshould used with keys 'b' , 's' , 'e'");
 		id = id_;
-		threshold = threshold_;
+		thresholdDouble = threshold_;
 		rewardB = reward_;
 		statusKey = statusKey_;
 
@@ -40,7 +41,7 @@ public class PriorityValueCountRule {
 			System.err.println(
 					"input parametrs can be used just for checking bigger/smaller/equals \nshould used with keys 'b' , 's' , 'e'");
 		id = id_;
-		threshold = threshold_;
+		thresholdDouble = threshold_;
 		rewardB = rewardB_;
 		rewardS = rewardS_;
 		statusKey = statusKey_;
@@ -55,45 +56,63 @@ public class PriorityValueCountRule {
 			System.err.println(
 					"input parametrs can be used just for checking bigger/smaller/equals \nshould used with keys 'b' , 's' , 'e'");
 		id = id_;
-		threshold = threshold_;
+		thresholdDouble = threshold_;
 		rewardB = rewardB_;
 		rewardS = rewardS_;
 		rewardE = rewardE_;
 		statusKey = statusKey_;
 	}
 
-	PriorityValueCountRule(String id_, char statusKey_, String contains_, double reward) {
+	PriorityValueCountRule(String id_, char statusKey_, double reward) {
 		if (statusKey_ != 'c')
 			System.err.println(
 					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
 		id = id_;
 		statusKey = statusKey_;
-		contains = contains_;
 		rewardB = reward;
 		rewardS = 0;
 	}
 
-	PriorityValueCountRule(String id_, char statusKey_, String contains_, double rewardB_, double rewardS_) {
+	PriorityValueCountRule(String id_, char statusKey_, double rewardB_, double rewardS_) {
 		if (statusKey_ != 'c')
 			System.err.println(
 					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
 		id = id_;
 		statusKey = statusKey_;
-		contains = contains_;
+		rewardB = rewardB_;
+		rewardS = rewardS_;
+	}
+
+	PriorityValueCountRule(String id_, char statusKey_, char thresholdChar, double rewardB_, double rewardS_) {
+		if (statusKey_ != 'a')
+			System.err.println(
+					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
+		id = id_;
+		statusKey = statusKey_;
 		rewardB = rewardB_;
 		rewardS = rewardS_;
 	}
 
 	public double calculateValue(MutationParameter m) {
+
 		switch (statusKey) {
+		case 'a':
+			for (int i = 0; i < m.getValue(id).size(); i++)
+				if ((char) m.getValue(id).get(i) == thresholdChar)
+					return rewardE;
+			return 0;
 		case 'c':
-			return m.containsValue(contains) ? rewardB : rewardS;
+			return m.containsValue(id) ? rewardB : rewardS;
 		case 'e':
-			return m.getValue(id) == threshold ? rewardE : 0;
+			for (int i = 0; i < m.getValue(id).size(); i++)
+				if ((double) m.getValue(id).get(i) == thresholdDouble)
+					return rewardE;
+
+			return 0;
 		case 'b':
-			return m.getValue(id) > threshold ? rewardB : 0;
+			return (double) m.getValue(id).get(0) > thresholdDouble ? rewardB : 0;
 		case 's':
-			return m.getValue(id) < threshold ? rewardS : 0;
+			return (double) m.getValue(id).get(0) < thresholdDouble ? rewardS : 0;
 		default:
 			System.err.println("invalid key entered");
 			return 0;

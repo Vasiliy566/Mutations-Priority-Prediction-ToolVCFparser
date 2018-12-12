@@ -1,15 +1,18 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class MutationParameter {
 
-	private int chrom;
+	private char chrom;
 	// Chromosome's number
 	// example: 20
 	// meaning: The name of the sequence (typically a chromosome) on which the
@@ -51,8 +54,9 @@ public class MutationParameter {
 	// example: q10
 	// meaning: A flag indicating which of a given set of filters the variation has
 	// passed.
+	private ArrayList<InformationParameter> parameters = new ArrayList<InformationParameter>();
 
-	private HashMap<String, Double> info = new HashMap<String, Double>();
+	private HashMap<String, List<Object>> info = new HashMap<String, List<Object>>();
 	// List of key-value pairs
 	// example: NS=3;DP=11;AF=0.017
 	// meaning : An extensible list of key-value pairs (fields) describing the
@@ -70,11 +74,12 @@ public class MutationParameter {
 
 	// Initialize MutationParameter object with VCF-format string
 	// !!! DANGEROUS! MONKEY CODING DETECTED!!!
-	MutationParameter(String infoFromVCF) {// CAN BE UPGRATE BY
-											// REFLECTIONS(http://qaru.site/questions/95345/how-to-loop-over-a-class-attributes-in-java)
+	MutationParameter(String infoFromVCF, ArrayList<InformationParameter> param) {// CAN BE UPGRATE BY
+		// REFLECTIONS(http://qaru.site/questions/95345/how-to-loop-over-a-class-attributes-in-java)
+		parameters = param;
 		Scanner scan = new Scanner(infoFromVCF);
 		try {
-			chrom = scan.nextInt();
+			chrom = scan.next().charAt(0);
 
 			pos = scan.nextInt();
 
@@ -95,18 +100,46 @@ public class MutationParameter {
 
 			for (int i = 0; i < s.length(); i++) {
 				if (s.charAt(i) == '=' && i + 1 < s.length()) {
-					for (int j = i + 1; j < s.length() && s.charAt(j) != ';'; j++)
+					ArrayList possibleValues = new ArrayList();
+					for (int j = i + 1; j < s.length(); j++) {
 						value += s.charAt(j);
-					i += value.length() + 1;
-					info.put(key, Double.valueOf(value));
-					value = "";
-					key = "";
+						char flag = value.charAt(value.length() - 1);
+						if (flag == ';' || flag == '|' || flag == ',') {
 
+							int k = 0;
+							while (k < parameters.size() && !parameters.get(k).getName().equals(key))
+								k++;
+							if (k >= parameters.size()) { // !!
+							} else {
+								if (parameters.get(k).getType().equals("Integer"))
+									possibleValues.add(Integer.valueOf(value.substring(0, value.length() - 2)));
+								else if (parameters.get(k).getType().equals("Double")
+										|| parameters.get(k).getType().equals("Float"))
+									possibleValues.add(Double.valueOf(value.substring(0, value.length() - 2)));
+								else if (parameters.get(k).getType().equals("String"))
+									possibleValues.add(value.substring(0, value.length() - 2));
+								else if (parameters.get(k).getType().equals("Character"))
+									possibleValues.add(value.substring(0, value.length() - 2).charAt(0));
+								else if (parameters.get(k).getType().equals("Flag"))
+									possibleValues.add(value.substring(0, value.length() - 2));
+							}
+							value = "";
+						}
+						System.out.println(value);
+						if (flag == ';') {
+							info.put(key, possibleValues);
+							key = "";
+							i = j + 1;
+
+							break;
+						}
+
+					}
 				} else {
 					key += s.charAt(i);
 				}
 			}
-
+			System.out.println(info.size());
 			s = scan.next();
 			String ans = "";
 			for (int i = 0; i < s.length(); i++) {
@@ -120,7 +153,9 @@ public class MutationParameter {
 			format.add(ans);
 
 			scan.close();
-		} catch (InputMismatchException e1) {
+		} catch (
+
+		InputMismatchException e1) {
 			System.err.println("INVALID  NUMERICAL MUTATION VCF-STRING PARAMETR");
 			throw e1;
 		} catch (NoSuchElementException e2) {
@@ -134,9 +169,15 @@ public class MutationParameter {
 		String ans = (chrom + "\t" + pos + "\t" + ID + "\t" + ref + "\t" + alt + "\t" + qual + "\t" + filter + "\t");
 
 		// return INFO-values
-		for (@SuppressWarnings("rawtypes")
-		Map.Entry entry : info.entrySet())
-			ans += entry.getKey() + "=" + entry.getValue() + ";";
+		for (Map.Entry<String, List<Object>> entry : info.entrySet()) {
+			ans += entry.getKey();
+			ans += "=";
+			for (int i = 0; i < entry.getValue().size(); i++)
+				ans += entry.getValue().get(i) + "|";
+			ans += ';';
+
+		}
+
 		ans += "\t";
 
 		// return FORMAT values
@@ -148,20 +189,26 @@ public class MutationParameter {
 	}
 
 	// add values [INFO ID] , [value] to values HashMap
-	void addInfoValue(String key, double value) {
-		info.put(key, value);
+	void addInfoValue(String key, Object value) {
+		info.get(key).add(value);
 	}
-    public boolean containsValue(String paramName) {
-    	if (info.get(paramName) != null)
-    		return true;
-    	return false;
-    }
-	double getValue(String paramName) {
+
+	public boolean containsValue(String paramName) {
+		if (info.get(paramName) != null)
+			return true;
+		return false;
+	}
+
+	List getValue(String paramName) {
 		try {
 			return info.get(paramName);
 		} catch (Exception e) {
 			System.err.println("No such parametr as <" + paramName + "> in mutation " + ID);
-			return 0;
+			return new ArrayList();
 		}
+	}
+
+	String getId() {
+		return ID;
 	}
 }

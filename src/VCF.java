@@ -22,13 +22,17 @@ public class VCF {
 	VCF(String filePath) throws IOException {
 		BufferedReader buf = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
 		String curString = "";
+		parameters
+				.add(new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
 		while ((curString = buf.readLine()) != null) {
 			if (curString.substring(0, 6).equals("##INFO"))
 				parameters.add(new InformationParameter(curString));
 			else if (curString.charAt(0) == '#')
 				defaultStringTemplate = curString;
-			else
-				mutations.add(new MutationParameter(curString));
+			else {
+				mutations.add(new MutationParameter(curString, parameters));
+				System.out.println(mutations.get(0).VcfFormat());
+			}
 		}
 		buf.close();
 		// default configurations to calculate mutaion's parameters
@@ -65,15 +69,23 @@ public class VCF {
 	}
 
 	void CalculatePriorityMutation() {
-		if (!parameters.contains(new InformationParameter(
-				"##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">")))
-			parameters.add(new InformationParameter(
-					"##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
+		if (!parameters.contains(
+				new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">")))
+			parameters.add(
+					new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
 		for (MutationParameter mutation : mutations) {
 			double priorityValue = 0;
 			for (PriorityValueCountRule rule : priorityConfigs)
 				priorityValue += rule.calculateValue(mutation);
 			mutation.addInfoValue("MP", priorityValue);
+		}
+	}
+
+	void CalculateImportantMutation(Double score) {
+		for (int i = 0; i < mutations.size(); i++) {
+			if ((double) mutations.get(i).getValue("MP").get(0) >= score) {
+				System.out.println(mutations.get(i).getId() + " mp =" + mutations.get(i).getValue("MP"));
+			}
 		}
 	}
 }

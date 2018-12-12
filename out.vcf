@@ -1,13 +1,71 @@
-##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of Samples With Data">
-##INFO=<ID=DP,Number=1,Type=Integer,Description="Total Depth">
-##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency">
-##INFO=<ID=AA,Number=1,Type=String,Description="Ancestral Allele">
-##INFO=<ID=DB,Number=0,Type=Flag,Description="dbSNP membership, build 129">
-##INFO=<ID=H2,Number=0,Type=Flag,Description="HapMap2 membership">
 ##INFO=<ID=MP,Number=1,Type=Double,Description="Mutation priority">
-#CHROM POS      ID         REF   ALT    QUAL  FILTER   INFO                             FORMAT       NA00001         NA00002          NA00003
-20	14370	rs6054257	G	A	29.0	PASS	MP=0.33333;NS=3.0;AF=0.5;DP=14.0;	GT:GQ:DP:HQ
-20	17330	.	T	A	3.0	q10	MP=0.33333;NS=3.0;AF=0.017;DP=11.0;	GT:GQ:DP:HQ
-20	1110696	rs6040355	A	G	67.0	PASS	MP=0.33333;NS=2.0;AF=0.333;DP=10.0;	GT:GQ:DP:HQ
-20	1230237	.	T	.	47.0	PASS	MP=0.33333;NS=3.0;DP=13.0;	GT:GQ:DP:HQ
-20	1234567	microsat1	G	G	50.0	PASS	MP=0.33333;NS=3.0;DP=9.0;	GT:GQ:DP
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities">
+##INFO=<ID=ClippingRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref number of hard clipped bases">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered">
+##INFO=<ID=DS,Number=0,Type=Flag,Description="Were any of the samples downsampled?">
+##INFO=<ID=END,Number=1,Type=Integer,Description="Stop position of the interval">
+##INFO=<ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity">
+##INFO=<ID=FS,Number=1,Type=Float,Description="Phred-scaled p-value using Fisher's exact test to detect strand bias">
+##INFO=<ID=HaplotypeScore,Number=1,Type=Float,Description="Consistency of the site with at most two segregating haplotypes">
+##INFO=<ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation">
+##INFO=<ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed">
+##INFO=<ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed">
+##INFO=<ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality">
+##INFO=<ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities">
+##INFO=<ID=NEGATIVE_TRAIN_SITE,Number=0,Type=Flag,Description="This variant was used to build the negative training set of bad variants">
+##INFO=<ID=PG,Number=G,Type=Integer,Description="Genotype Likelihood Prior">
+##INFO=<ID=POSITIVE_TRAIN_SITE,Number=0,Type=Flag,Description="This variant was used to build the positive training set of good variants">
+##INFO=<ID=QD,Number=1,Type=Float,Description="Variant Confidence/Quality by Depth">
+##INFO=<ID=RAW_MQ,Number=1,Type=Float,Description="Raw data for RMS Mapping Quality">
+##INFO=<ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias">
+##INFO=<ID=SOR,Number=1,Type=Float,Description="Symmetric Odds Ratio of 2x2 contingency table to detect strand bias">
+##INFO=<ID=VQSLOD,Number=1,Type=Float,Description="Log odds of being a true variant versus being false under the trained gaussian mixture model">
+##INFO=<ID=culprit,Number=1,Type=String,Description="The annotation which was the worst performing in the Gaussian mixture model, likely the reason why the variant was filtered out">
+##INFO=<ID=CLNSIG,Number=.,Type=String,Description="Variant Clinical Significance, 0 - Uncertain significance, 1 - not provided, 2 - Benign, 3 - Likely benign, 4 - Likely pathogenic, 5 - Pathogenic, 6 - drug response, 7 - histocompatibility, 255 - other">
+##INFO=<ID=CLNREVSTAT,Number=.,Type=String,Description="no_assertion - No assertion provided, no_criteria - No assertion criteria provided, single - Criteria provided single submitter, mult - Criteria provided multiple submitters no conflicts, conf - Criteria provided conflicting interpretations, exp - Reviewed by expert panel, guideline - Practice guideline">
+##INFO=<ID=CLNDBN,Number=.,Type=String,Description="Variant disease name">
+##INFO=<ID=OM,Number=0,Type=Flag,Description="Has OMIM/OMIA">
+##INFO=<ID=PM,Number=0,Type=Flag,Description="Variant is Precious(Clinical,Pubmed Cited)">
+##INFO=<ID=X1000Gp3_AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
+##INFO=<ID=ExAC_AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
+##INFO=<ID=ESP6500_AF,Number=.,Type=String,Description="Minor Allele Frequency in percent in the order of EA,AA,All">
+##INFO=<ID=BIOBANK_AF_v20171101,Number=A,Type=Float,Description="Allele Frequency in the SPBU BIOBANK (collected 2017-11-01 (570 samples)">
+##INFO=<ID=GWASCAT_TRAIT,Number=.,Type=String,Description="GWAS catalog: Associated trait">
+##INFO=<ID=GWASCAT_P_VALUE,Number=.,Type=Float,Description="GWAS catalog: p-value">
+##INFO=<ID=GWASCAT_OR_BETA,Number=.,Type=Float,Description="GWAS catalog: OR or Beta">
+##INFO=<ID=GWASCAT_REPORTED_GENE,Number=.,Type=String,Description="GWAS catalog: Reported gene">
+##INFO=<ID=GWASCAT_PUBMED_ID,Number=.,Type=String,Description="GWAS catalog: Original paper's Pubmed ID">
+##INFO=<ID=dbNSFP_Polyphen2_HVAR_pred,Number=A,Type=Character,Description="Field 'Polyphen2_HVAR_pred' from dbNSFP">
+##INFO=<ID=dbNSFP_PROVEAN_pred,Number=A,Type=Character,Description="Field 'PROVEAN_pred' from dbNSFP">
+##INFO=<ID=dbNSFP_SIFT_pred,Number=A,Type=Character,Description="Field 'SIFT_pred' from dbNSFP">
+##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ">
+##INFO=<ID=LOF,Number=.,Type=String,Description="Predicted loss of function effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Percent_of_transcripts_affected' ">
+##INFO=<ID=NMD,Number=.,Type=String,Description="Predicted nonsense mediated decay effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Percent_of_transcripts_affected' ">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SB0-0005	SB1-0020	SB1-0327	SB4-0004	SB4-0022	SB4-0032	SSMA2	SSMA3
+6	157519969	rs748363079	T	C	488.18	PASS	Q=;S=;QSLOD=;M;ExAC_AF=;D=;AF=0.06|;LNREVSTAT=;LNSIG=;LNDBN=;
+1	28228553	rs74653330	C	T	18183.82	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	80472526	rs11555096	C	T	18199.02	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	2168022	rs199476099	C	A	5772.61	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	14041848	rs121913049	C	T	1448.57	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;ExAC_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	66551110	rs137886900	G	A	2803.57	PASS	QSLOD=;D=;AF=0.06|;M;PM;ExAC_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	12899902	rs5030739	C	T	12571.79	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	72759575	rs119486097	G	A	5172.58	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	57134052	rs121908253	G	A	703.18	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	11210912	rs2228671	C	T	46978.43	PASS	Q=;S=;QSLOD=;xAC_AF=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;LNREVSTAT=;IOBANK_AF_v20171101=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	35786868	rs2301600	C	T	15890.4	PASS	Q=;S=;QSLOD=;xAC_AF=;SP6500_AF=;D=;AF=0.18|;LNREVSTAT=;M;X1000Gp3_AF=;IOBANK_AF_v20171101=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+1	45316804	rs3810141	C	T	14862.36	PASS	Q=;S=;QSLOD=;xAC_AF=;SP6500_AF=;D=;AF=0.18|;M;PM;X1000Gp3_AF=;LNREVSTAT=;IOBANK_AF_v20171101=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PGT:PID:PL:PP
+2	5283323	rs74315416	A	C	586.18	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	5283323	rs74315416	A	C	586.18	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	23618427	rs1064039	C	T	19026.03	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	43280227	rs73598374	C	T	8472.7	PASS	QSLOD=;SP6500_AF=;D=;AF=0.12|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PGT:PID:PL:PP
+2	46931109	rs12483377	G	A	26975.46	PASS	QSLOD=;SP6500_AF=;D=;AF=0.12|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	17670877	rs146597836	C	T	924.18	PASS	QSLOD=;SP6500_AF=;D=;AF=0.06|;1000Gp3_AF=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	18901004	rs450046	C	T	391886.21	PASS	QSLOD=;SP6500_AF=;D=;AF=1.0|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	18905964	rs2904552	C	T	11385.86	PASS	QSLOD=;SP6500_AF=;AF=0.12|;M;PM;X1000Gp3_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;xAC_AF=;bNSFP_SIFT_pred=;LNREVSTAT=;EGATIVE_TRAIN_SITE;QD=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	24896073	rs138081800	A	G	726.18	PASS	NN=;Q=;S=;QSLOD=;M;ExAC_AF=;SP6500_AF=;D=;AF=0.06|;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+2	51063477	rs6151429	T	C	1312.66	PASS	Q=;S=;QSLOD=;D=;AF=0.06|;M;PM;X1000Gp3_AF=;LNREVSTAT=;IOBANK_AF_v20171101=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
+X	55057617	rs140772352	G	C	8342.57	PASS	Q=;S=;QSLOD=;D=;AF=0.06|;LNREVSTAT=;LNSIG=;LNDBN=;M;BIOBANK_AF_v20171101=;	GT:AD:DP:GQ:PL:PP
+X	105278361	rs1804495	C	A	22062.28	PASS	QSLOD=;SP6500_AF=;D=;AF=0.25|;M;PM;ExAC_AF=;IOBANK_AF_v20171101=;bNSFP_PROVEAN_pred=;bNSFP_Polyphen2_HVAR_pred=;Q=;S=;bNSFP_SIFT_pred=;LNREVSTAT=;LNSIG=;LNDBN=;	GT:AD:DP:GQ:PL:PP
