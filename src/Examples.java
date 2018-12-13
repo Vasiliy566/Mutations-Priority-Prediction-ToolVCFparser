@@ -24,6 +24,7 @@ public class Examples {
 		PriorityValueCountRule prediction_4 = new PriorityValueCountRule("dbNSFP_SIFT_pred", 'e', 'D', 0.5);
 		
 		PriorityValueCountRule annotation_1 = new PriorityValueCountRule("OM", 'c', 1.0);
+
 		/*PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "nonsense", 1.5);
 		PriorityValueCountRule annotation_3 = new PriorityValueCountRule("ANN", 's', "splic", 1.0);
 		PriorityValueCountRule annotation_4 = new PriorityValueCountRule("ANN", 's', "+1", 0.5);
@@ -46,6 +47,20 @@ public class Examples {
 		a.addCalculateConfig(annotation_1);
 		a.CalculatePriorityMutation();
 		a.CalculateImportantMutation(-100.0);
+
+	/*	
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "nonsense", 1.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "splic", 1.0);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "+1", 0.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "+2", 0.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "+3", 0.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "-1", 0.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "-2", 0.5);
+		PriorityValueCountRule annotation_2 = new PriorityValueCountRule("ANN", 's', "-3", 0.5);
+	*/	
+	
+		
+
 		
 
 	}

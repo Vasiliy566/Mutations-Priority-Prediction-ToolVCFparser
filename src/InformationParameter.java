@@ -65,10 +65,9 @@ public class InformationParameter {
 	 * <br />
 	 * <b>Constructor: make new object from list of all the parameters</b> <br />
 	 * <b>Usage: to create new own VCF-parameters </b>
-	 * 
 	 * @param ID_          - ID
 	 * @param number_      - number
-	 * @param type_        - type
+	 * @param type_        - type	
 	 * @param descreption_ - descreption
 	 * @see InformationParameter#InformationParameter()
 	 */
