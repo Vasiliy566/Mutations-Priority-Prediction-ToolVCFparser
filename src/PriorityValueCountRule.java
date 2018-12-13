@@ -94,8 +94,10 @@ public class PriorityValueCountRule {
 		case 'c':
 			return m.containsValue(id) ? rewardB : rewardS;
 		case 'e':
+			
 			for (int i = 0; i < m.getValue(id).size(); i++) {
-				if ( "" + m.getValue(id).get(i) == thresholdDouble + "")
+			
+				if ( Double.valueOf(m.getValue(id).get(i).toString()) == thresholdDouble )
 					return rewardE;
 			}
 			return 0;

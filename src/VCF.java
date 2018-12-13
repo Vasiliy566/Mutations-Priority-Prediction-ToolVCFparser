@@ -31,7 +31,7 @@ public class VCF {
 				defaultStringTemplate = curString;
 			else {
 				mutations.add(new MutationParameter(curString, parameters));
-				System.out.println(mutations.get(0).VcfFormat());
+				
 			}
 		}
 		buf.close();
@@ -84,11 +84,11 @@ public class VCF {
 	}
 
 	void CalculateImportantMutation(Double score) {
-		for (int i = 0; i < mutations.size(); i++) {
-			System.out.println(mutations.get(i).getValue("MP").get(0));
-			if ( Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1 , mutations.get(i).getValue("MP").get(0).toString().length() - 1)) >= score) {
-				System.out.println(mutations.get(i).getId() + " mp =" + mutations.get(i).getValue("MP"));
-			}
-		}
+		for (int i = 0; i < mutations.size(); i++)
+			if (Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1,
+					mutations.get(i).getValue("MP").get(0).toString().length() - 1)) >= score)
+				mutations.get(i).addInfoValue("MP", Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1,
+						mutations.get(i).getValue("MP").get(0).toString().length() - 1)));
+
 	}
 }

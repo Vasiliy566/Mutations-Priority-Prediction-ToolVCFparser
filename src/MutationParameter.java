@@ -108,7 +108,7 @@ public class MutationParameter {
 						if (flag == ';' || flag == '|' || flag == ',') {
 
 							int k = 0;
-							System.out.println(key + value);
+
 							while (k < parameters.size() && !parameters.get(k).getName().equals(key))
 								k++;
 
@@ -175,7 +175,6 @@ public class MutationParameter {
 		// return INFO-values
 		for (Map.Entry<String, List<Object>> entry : info.entrySet()) {
 			ans += entry.getKey();
-			System.out.println(entry.getValue().size() + " - " + entry.getKey());
 			ans += "=";
 			if (entry.getValue().size() != 0) {
 				ans += entry.getValue().get(0);
