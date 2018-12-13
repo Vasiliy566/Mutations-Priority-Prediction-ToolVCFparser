@@ -75,15 +75,18 @@ public class VCF {
 					new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
 		for (MutationParameter mutation : mutations) {
 			double priorityValue = 0;
+			List<Double> valueList = new ArrayList<Double>();
 			for (PriorityValueCountRule rule : priorityConfigs)
 				priorityValue += rule.calculateValue(mutation);
-			mutation.addInfoValue("MP", priorityValue);
+			valueList.add(priorityValue);
+			mutation.addInfoValue("MP", valueList);
 		}
 	}
 
 	void CalculateImportantMutation(Double score) {
 		for (int i = 0; i < mutations.size(); i++) {
-			if ((double) mutations.get(i).getValue("MP").get(0) >= score) {
+			System.out.println(mutations.get(i).getValue("MP").get(0));
+			if ( Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1 , mutations.get(i).getValue("MP").get(0).toString().length() - 1)) >= score) {
 				System.out.println(mutations.get(i).getId() + " mp =" + mutations.get(i).getValue("MP"));
 			}
 		}

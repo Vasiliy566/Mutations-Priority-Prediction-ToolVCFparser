@@ -22,7 +22,7 @@ public class PriorityValueCountRule {
 
 	// Constructor if given just parameter for More / Less
 
-	PriorityValueCountRule(String id_, char statusKey_, int threshold_, double reward_) {
+	PriorityValueCountRule(String id_, char statusKey_, double threshold_, double reward_) {
 		if (!(statusKey_ == 'b' || statusKey_ == 'e' || statusKey_ == 's'))
 			System.err.println(
 					"input parametrs can be used just for checking bigger/smaller/equals\nshould used with keys 'b' , 's' , 'e'");
@@ -73,16 +73,6 @@ public class PriorityValueCountRule {
 		rewardS = 0;
 	}
 
-	PriorityValueCountRule(String id_, char statusKey_, double rewardB_, double rewardS_) {
-		if (statusKey_ != 'c')
-			System.err.println(
-					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
-		id = id_;
-		statusKey = statusKey_;
-		rewardB = rewardB_;
-		rewardS = rewardS_;
-	}
-
 	PriorityValueCountRule(String id_, char statusKey_, char thresholdChar, double rewardB_, double rewardS_) {
 		if (statusKey_ != 'a')
 			System.err.println(
@@ -104,10 +94,10 @@ public class PriorityValueCountRule {
 		case 'c':
 			return m.containsValue(id) ? rewardB : rewardS;
 		case 'e':
-			for (int i = 0; i < m.getValue(id).size(); i++)
-				if ((double) m.getValue(id).get(i) == thresholdDouble)
+			for (int i = 0; i < m.getValue(id).size(); i++) {
+				if ( "" + m.getValue(id).get(i) == thresholdDouble + "")
 					return rewardE;
-
+			}
 			return 0;
 		case 'b':
 			return (double) m.getValue(id).get(0) > thresholdDouble ? rewardB : 0;

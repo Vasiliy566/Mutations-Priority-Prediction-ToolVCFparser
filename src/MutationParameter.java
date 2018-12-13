@@ -97,23 +97,23 @@ public class MutationParameter {
 
 			String key = "";
 			String value = "";
-			
+
 			for (int i = 0; i < s.length(); i++) {
 				if (s.charAt(i) == '=' && i + 1 < s.length()) {
 					ArrayList possibleValues = new ArrayList();
 					for (int j = i + 1; j < s.length(); j++) {
 						value += s.charAt(j);
 						char flag = value.charAt(value.length() - 1);
-						
+
 						if (flag == ';' || flag == '|' || flag == ',') {
-							
+
 							int k = 0;
 							System.out.println(key + value);
 							while (k < parameters.size() && !parameters.get(k).getName().equals(key))
 								k++;
-							
-							if (k < parameters.size() && value.length() - 2 >= 0 ) { // !!
-							
+
+							if (k < parameters.size() && value.length() - 2 >= 0) { // !!
+
 								if (parameters.get(k).getType().equals("Integer"))
 									possibleValues.add(Integer.valueOf(value.substring(0, value.length() - 1)));
 								else if (parameters.get(k).getType().equals("Double")
@@ -127,15 +127,15 @@ public class MutationParameter {
 									possibleValues.add(value.substring(0, value.length() - 1));
 								value = "";
 							}
-							
+
 						}
 						if (flag == ';') {
 							info.put(key, possibleValues);
-								
+
 							value = "";
 							key = "";
 							i = j;
-						  
+
 							break;
 						}
 
@@ -175,14 +175,14 @@ public class MutationParameter {
 		// return INFO-values
 		for (Map.Entry<String, List<Object>> entry : info.entrySet()) {
 			ans += entry.getKey();
-			System.out.println(entry.getValue().size()  + " - " + entry.getKey());
+			System.out.println(entry.getValue().size() + " - " + entry.getKey());
 			ans += "=";
 			if (entry.getValue().size() != 0) {
 				ans += entry.getValue().get(0);
 			}
-				for (int i = 1; i < entry.getValue().size(); i++) {
+			for (int i = 1; i < entry.getValue().size(); i++) {
 				ans += entry.getValue().get(i) + "|";
-				}
+			}
 			ans += ';';
 
 		}
@@ -199,7 +199,14 @@ public class MutationParameter {
 
 	// add values [INFO ID] , [value] to values HashMap
 	void addInfoValue(String key, Object value) {
-		info.get(key).add(value);
+
+		if (info.get(key) != null)
+			info.get(key).add(value);
+		else {
+			List values = new ArrayList();
+			values.add(value);
+			info.put(key, values);
+		}
 	}
 
 	public boolean containsValue(String paramName) {
