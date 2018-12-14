@@ -115,7 +115,6 @@ public class PriorityValueCountRule {
 							return rewardE;
 					return 0;
 				case 'c':
-					System.out.println("AA");
 					return m.containsValue(id) ? rewardB : rewardS;
 				case 'e':
 

@@ -111,7 +111,7 @@ public class MutationParameter {
 
 							while (k < parameters.size() && !parameters.get(k).getName().equals(key))
 								k++;
-						
+
 							if (k < parameters.size() && value.length() - 2 >= 0) { // !!
 
 								if (parameters.get(k).getType().equals("Integer"))
@@ -130,8 +130,7 @@ public class MutationParameter {
 
 						}
 						if (flag == ';') {
-							if (possibleValues.isEmpty())
-								possibleValues.add("");
+
 							info.put(key, possibleValues);
 
 							value = "";
@@ -142,12 +141,16 @@ public class MutationParameter {
 						}
 
 					}
+				} else if (s.charAt(i) == ';') {
+					ArrayList possibleValues = new ArrayList();
+					possibleValues.add("");
+					info.put(key, possibleValues);
+					key = "";
 				} else {
 					key += s.charAt(i);
 				}
 			}
-			
-			
+
 			String ans = "";
 			for (int i = 0; i < s.length(); i++) {
 				if (s.charAt(i) != ':') {
