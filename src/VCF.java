@@ -25,7 +25,7 @@ public class VCF {
 		parameters
 				.add(new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
 		while ((curString = buf.readLine()) != null) {
-			if (curString.substring(0, 6).equals("##INFO"))
+			if (curString.length() >= 6 && curString.substring(0, 6).equals("##INFO")  )
 				parameters.add(new InformationParameter(curString));
 			else if (curString.charAt(0) == '#')
 				defaultStringTemplate = curString;
@@ -83,7 +83,7 @@ public class VCF {
 	void CalculateImportantMutation(Double score) {
 		for (int i = 0; i < mutations.size(); i++)
 			if (Double.valueOf(mutations.get(i).getValue("MP").get(0).toString()) >= 0.0)
-				System.out.println(mutations.get(i).getId());
+				System.out.println(mutations.get(i).getId() + " MP = " +  mutations.get(i).getValue("MP"));
 
 		// mutations.get(i).addInfoValue("MP",
 		// Double.valueOf(mutations.get(i).getValue("MP").get(0).toString()

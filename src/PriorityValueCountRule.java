@@ -73,6 +73,16 @@ public class PriorityValueCountRule {
 		rewardS = 0;
 	}
 
+	PriorityValueCountRule(String id_, char statusKey_, char thresholdChar, double rewardB_) {
+		if (statusKey_ != 'a')
+			System.err.println(
+					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
+		id = id_;
+		statusKey = statusKey_;
+		rewardB = rewardB_;
+		rewardS = 0;
+	}
+
 	PriorityValueCountRule(String id_, char statusKey_, char thresholdChar, double rewardB_, double rewardS_) {
 		if (statusKey_ != 'a')
 			System.err.println(
@@ -81,6 +91,17 @@ public class PriorityValueCountRule {
 		statusKey = statusKey_;
 		rewardB = rewardB_;
 		rewardS = rewardS_;
+	}
+
+	PriorityValueCountRule(String id_, char statusKey_, String contains_, double rewardB_) {
+		if (statusKey_ != 'd')
+			System.err.println(
+					"input parameters can be just used for checking  contains given string or not\nshould used with key 'c'");
+		id = id_;
+		statusKey = statusKey_;
+		contains = contains_;
+		rewardB = rewardB_;
+		rewardS = 0;
 	}
 
 	public double calculateValue(MutationParameter m) {
@@ -102,9 +123,16 @@ public class PriorityValueCountRule {
 				}
 				return 0;
 			case 'b':
-				return Double.valueOf(m.getValue(id).get(0).toString()) > thresholdDouble ? rewardB : 0;
+				return Double.valueOf(m.getValue(id).get(0).toString()) > thresholdDouble ? rewardB : rewardS;
 			case 's':
-				return Double.valueOf(m.getValue(id).get(0).toString()) < thresholdDouble ? rewardS : 0;
+				return Double.valueOf(m.getValue(id).get(0).toString()) < thresholdDouble ? rewardS : rewardB;
+			case 'd':
+				for (int i = 0; i < m.getValue(id).size(); i++)
+					if (("" + m.getValue(id).get(i)).contains(contains)) {
+						
+						return rewardB;
+						}
+				return 0;
 			default:
 				System.err.println("invalid key entered");
 			}
