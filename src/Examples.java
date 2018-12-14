@@ -11,8 +11,11 @@ public class Examples {
 		// 1.1 - параметры для ключей 'e'/'b'/'s'
 
 		// если eQUALS, то +1.5, если нет, то +0
-		PriorityValueCountRule ClinVar_1 = new PriorityValueCountRule("CLNSIG", 'e', 5.0, 1.5);
+		PriorityValueCountRule ClinVar_1 = new PriorityValueCountRule("CLNSIG", 'e', 5, 1.5);
 		PriorityValueCountRule ClinVar_2 = new PriorityValueCountRule("CLNSIG", 'e', 4, 1.0);
+		PriorityValueCountRule ClinVar_3 = new PriorityValueCountRule("CLNSIG", 'e', 1, -0.5);
+		PriorityValueCountRule ClinVar_4 = new PriorityValueCountRule("CLNSIG", 'e', 2, -1.0);
+		PriorityValueCountRule ClinVar_5 = new PriorityValueCountRule("CLNSIG", 'e', 3, -0.5);
 
 		// если больше чем 1.5, то +3, если меньше, то -5, если равны, то + 3
 		PriorityValueCountRule frequency_1 = new PriorityValueCountRule("X1000Gp3_AF", 'b', 0.01, 0, 1.0);
@@ -38,6 +41,9 @@ public class Examples {
 
 		a.addCalculateConfig(ClinVar_1);
 		a.addCalculateConfig(ClinVar_2);
+		a.addCalculateConfig(ClinVar_3);
+		a.addCalculateConfig(ClinVar_4);
+		a.addCalculateConfig(ClinVar_5);
 
 		a.addCalculateConfig(frequency_1);
 		a.addCalculateConfig(frequency_2);
