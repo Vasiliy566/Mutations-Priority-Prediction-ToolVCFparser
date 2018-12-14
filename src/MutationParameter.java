@@ -111,7 +111,7 @@ public class MutationParameter {
 
 							while (k < parameters.size() && !parameters.get(k).getName().equals(key))
 								k++;
-
+						
 							if (k < parameters.size() && value.length() - 2 >= 0) { // !!
 
 								if (parameters.get(k).getType().equals("Integer"))
@@ -130,6 +130,8 @@ public class MutationParameter {
 
 						}
 						if (flag == ';') {
+							if (possibleValues.isEmpty())
+								possibleValues.add("");
 							info.put(key, possibleValues);
 
 							value = "";
@@ -144,7 +146,8 @@ public class MutationParameter {
 					key += s.charAt(i);
 				}
 			}
-			s = scan.next();
+			
+			
 			String ans = "";
 			for (int i = 0; i < s.length(); i++) {
 				if (s.charAt(i) != ':') {
@@ -214,7 +217,7 @@ public class MutationParameter {
 	}
 
 	public boolean containsValue(String paramName) {
-		if (info.get(paramName) != null)
+		if (info.containsKey(paramName))
 			return true;
 		return false;
 	}

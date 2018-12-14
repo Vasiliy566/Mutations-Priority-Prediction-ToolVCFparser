@@ -105,39 +105,40 @@ public class PriorityValueCountRule {
 	}
 
 	public double calculateValue(MutationParameter m) {
-		if (m.getValue(id) != null) {
-			switch (statusKey) {
-			case 'a':
-				for (int i = 0; i < m.getValue(id).size(); i++)
-					if ((char) m.getValue(id).get(i) == thresholdChar)
-						return rewardE;
-				return 0;
-			case 'c':
-				return m.containsValue(id) ? rewardB : rewardS;
-			case 'e':
+		
+		if (m.containsValue(id))
+			if (m.getValue(id).size() != 0) {
+				switch (statusKey) {
+				case 'a':
+					for (int i = 0; i < m.getValue(id).size(); i++)
+						if ((char) m.getValue(id).get(i) == thresholdChar)
+							return rewardE;
+					return 0;
+				case 'c':
+					System.out.println("AA");
+					return m.containsValue(id) ? rewardB : rewardS;
+				case 'e':
 
-				for (int i = 0; i < m.getValue(id).size(); i++) {
+					for (int i = 0; i < m.getValue(id).size(); i++)
+						if (Double.valueOf(m.getValue(id).get(i).toString()) == thresholdDouble)
+							return rewardE;
+					return 0;
+				case 'b':
+					return Double.valueOf(m.getValue(id).get(0).toString()) > thresholdDouble ? rewardB : rewardS;
+				case 's':
+					return Double.valueOf(m.getValue(id).get(0).toString()) < thresholdDouble ? rewardS : rewardB;
+				case 'd':
+					for (int i = 0; i < m.getValue(id).size(); i++)
+						if (("" + m.getValue(id).get(i)).contains(contains)) {
 
-					if (Double.valueOf(m.getValue(id).get(i).toString()) == thresholdDouble)
-						return rewardE;
-				}
-				return 0;
-			case 'b':
-				return Double.valueOf(m.getValue(id).get(0).toString()) > thresholdDouble ? rewardB : rewardS;
-			case 's':
-				return Double.valueOf(m.getValue(id).get(0).toString()) < thresholdDouble ? rewardS : rewardB;
-			case 'd':
-				for (int i = 0; i < m.getValue(id).size(); i++)
-					if (("" + m.getValue(id).get(i)).contains(contains)) {
-						
-						return rewardB;
+							return rewardB;
 						}
-				return 0;
-			default:
-				System.err.println("invalid key entered");
-			}
+					return 0;
+				default:
+					System.err.println("invalid key entered");
+				}
 
-		}
+			}
 		return 0;
 	}
 }
