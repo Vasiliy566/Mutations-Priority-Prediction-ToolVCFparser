@@ -176,12 +176,12 @@ public class MutationParameter {
 		for (Map.Entry<String, List<Object>> entry : info.entrySet()) {
 			ans += entry.getKey();
 			ans += "=";
-			if (entry.getValue().size() != 0) {
+			if (entry.getValue().size() != 0)
 				ans += entry.getValue().get(0);
-			}
-			for (int i = 1; i < entry.getValue().size(); i++) {
+
+			for (int i = 1; i < entry.getValue().size(); i++)
 				ans += entry.getValue().get(i) + "|";
-			}
+
 			ans += ';';
 
 		}
@@ -198,10 +198,15 @@ public class MutationParameter {
 
 	// add values [INFO ID] , [value] to values HashMap
 	void addInfoValue(String key, Object value) {
+		if (info.get(key) != null) {
+			if (key.equals("MP")) {
+				double tmp = Double.valueOf(info.get("MP").get(0).toString());
+				info.get("MP").clear();
+				info.get("MP").add(tmp + Double.valueOf(value.toString()));
 
-		if (info.get(key) != null)
-			info.get(key).add(value);
-		else {
+			}
+
+		} else {
 			List values = new ArrayList();
 			values.add(value);
 			info.put(key, values);

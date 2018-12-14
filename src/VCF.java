@@ -31,7 +31,6 @@ public class VCF {
 				defaultStringTemplate = curString;
 			else {
 				mutations.add(new MutationParameter(curString, parameters));
-				
 			}
 		}
 		buf.close();
@@ -69,26 +68,27 @@ public class VCF {
 	}
 
 	void CalculatePriorityMutation() {
-		if (!parameters.contains(
-				new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">")))
-			parameters.add(
-					new InformationParameter("##INFO=<ID=MP,Number=1,Type=Double,Description=\"Mutation priority\">"));
+
 		for (MutationParameter mutation : mutations) {
 			double priorityValue = 0;
 			List<Double> valueList = new ArrayList<Double>();
 			for (PriorityValueCountRule rule : priorityConfigs)
 				priorityValue += rule.calculateValue(mutation);
 			valueList.add(priorityValue);
-			mutation.addInfoValue("MP", valueList);
+			mutation.addInfoValue("MP", valueList.get(0));
+
 		}
 	}
 
 	void CalculateImportantMutation(Double score) {
 		for (int i = 0; i < mutations.size(); i++)
-			if (Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1,
-					mutations.get(i).getValue("MP").get(0).toString().length() - 1)) >= score)
-				mutations.get(i).addInfoValue("MP", Double.valueOf(mutations.get(i).getValue("MP").get(0).toString().substring(1,
-						mutations.get(i).getValue("MP").get(0).toString().length() - 1)));
+			if (Double.valueOf(mutations.get(i).getValue("MP").get(0).toString()) >= 0.0)
+				System.out.println(mutations.get(i).getId());
+
+		// mutations.get(i).addInfoValue("MP",
+		// Double.valueOf(mutations.get(i).getValue("MP").get(0).toString()
+		// .substring(1, mutations.get(i).getValue("MP").get(0).toString().length() -
+		// 1)));
 
 	}
 }
