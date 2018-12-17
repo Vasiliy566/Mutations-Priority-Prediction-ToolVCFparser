@@ -237,4 +237,8 @@ public class MutationParameter {
 	String getId() {
 		return ID;
 	}
+
+	int getPos() {
+		return pos;
+	}
 }

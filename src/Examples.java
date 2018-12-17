@@ -63,7 +63,7 @@ public class Examples {
 		a.addCalculateConfig(annotation_9);
 		
 		a.CalculatePriorityMutation();
-		a.CalculateImportantMutation(-100.0);
+		a.CalculateImportantMutation(3.5);
 		a.printFile();
 	}
 

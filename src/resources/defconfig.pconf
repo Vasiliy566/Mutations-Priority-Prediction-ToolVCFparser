@@ -1,0 +1,21 @@
+"CLNSIG" 'e' 5 1.5
+"CLNSIG" 'e' 4 1.0
+"CLNSIG" 'e' 1 -0.5
+"CLNSIG" 'e' 2 -1.0
+"CLNSIG" 'e' 3 -0.5	
+"X1000Gp3_AF" 'b' 0.01 0 1.0
+"ExAC_AF" 'b' 0.01 0 1.0
+"ESP6500_AF" 'b' 0.01 0 1.0
+"dbNSFP_Polyphen2_HVAR_pred" 'a' 'D' 0.5
+"dbNSFP_Polyphen2_HVAR_pred" 'a' 'P' 0.25
+"dbNSFP_PROVEAN_pred" 'a' 'D' 0.5
+"dbNSFP_SIFT_pred" 'a' 'D' 0.5		
+"OM" 'c' 1.0
+"ANN" 'd' "nonsense" 1.5
+"ANN" 'd' "splice" 1.0
+"ANN" 'd' "+1" 0.5
+"ANN" 'd' "+2" 0.5
+"ANN" 'd' "+3" 0.5
+"ANN" 'd' "-1" 0.5
+"ANN" 'd' "-2" 0.5
+"ANN" 'd' "-3" 0.5

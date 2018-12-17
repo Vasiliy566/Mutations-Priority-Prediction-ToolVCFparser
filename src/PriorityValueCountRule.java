@@ -105,7 +105,7 @@ public class PriorityValueCountRule {
 	}
 
 	public double calculateValue(MutationParameter m) {
-		
+
 		if (m.containsValue(id))
 			if (m.getValue(id).size() != 0) {
 				switch (statusKey) {
@@ -117,7 +117,6 @@ public class PriorityValueCountRule {
 				case 'c':
 					return m.containsValue(id) ? rewardB : rewardS;
 				case 'e':
-
 					for (int i = 0; i < m.getValue(id).size(); i++)
 						if (Double.valueOf(m.getValue(id).get(i).toString()) == thresholdDouble)
 							return rewardE;
